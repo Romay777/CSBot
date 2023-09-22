@@ -13,4 +13,3 @@ balance = "Ваш текущий баланс: <b>placeholder</b>"
 user_players = "Игроки вашей команды:"
 
 player_list = "placeholder"
-

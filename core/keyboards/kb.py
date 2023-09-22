@@ -1,5 +1,5 @@
-from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup,
-                           ReplyKeyboardRemove)
+from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup)
+
 # Main menu
 main_menu = [
     [KeyboardButton(text="💸 Баланс"), KeyboardButton(text="🎮 Моя команда")],
