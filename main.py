@@ -5,8 +5,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums.parse_mode import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
+from core.handlers.handlers import router
 from core.middlewares import config
-from core.handlers import router
 
 
 async def main():
