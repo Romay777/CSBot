@@ -10,7 +10,7 @@ router = Router()
 
 @router.message(F.text == "💸 Баланс")
 async def get_balance(msg: Message):
-    await msg.answer(text.balance, reply_markup=kb.menu)
+    await msg.answer(text.balance, reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "💰 Купить/Продать игрока")
@@ -20,12 +20,12 @@ async def buy_sell_player(msg: Message):
 
 @router.message(F.text == "🎮 Моя команда")
 async def my_team(msg: Message):
-    await msg.answer(text.user_players, reply_markup=kb.menu)
+    await msg.answer(text.user_players, reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "👤 Список игроков")
 async def player_list(msg: Message):
-    await msg.answer(text.player_list, reply_markup=kb.menu)
+    await msg.answer(text.player_list, reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "🤑 Фармить")
@@ -53,14 +53,14 @@ async def farm_mp_7(callback: types.CallbackQuery):
 
 @router.message(Command("start"))
 async def start_handler(msg: Message):
-    await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu)
+    await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu_kb)
 
 
 @router.message(Command("globalelite"))
 async def author(msg: Message):
-    await msg.reply(text.author, reply_markup=kb.menu)
+    await msg.reply(text.author, reply_markup=kb.menu_kb)
 
 
 @router.message()
 async def message_handler(msg: Message):
-    await msg.answer(text.unknown, reply_markup=kb.menu)
+    await msg.answer(text.unknown, reply_markup=kb.menu_kb)
