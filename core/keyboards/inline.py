@@ -17,8 +17,7 @@ farm_kb = InlineKeyboardMarkup(inline_keyboard=farm_list, resize_keyboard=True)
 
 # List of Sides [A/B]
 choose_side_list = [
-    [InlineKeyboardButton(text="MAC-10", callback_data="mac-10")],
-    [InlineKeyboardButton(text="UMP-45", callback_data="ump-45")],
-    [InlineKeyboardButton(text="MP-7", callback_data="mp-7")]
+    [InlineKeyboardButton(text="Медленно \"A!\"\U0001F977", callback_data="side-a")],  # Ninja emoji here
+    [InlineKeyboardButton(text="Rush \"B\"!🤬", callback_data="side-b")]
 ]
 choose_side_kb = InlineKeyboardMarkup(inline_keyboard=choose_side_list, resize_keyboard=True)

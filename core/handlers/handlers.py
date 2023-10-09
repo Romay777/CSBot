@@ -33,21 +33,45 @@ async def farming(msg: Message):
     await msg.answer(text.farm, reply_markup=inline.farm_kb)
 
 
+@router.callback_query(F.data == "buy_player")
+async def play_side_a(callback: types.CallbackQuery):
+    await callback.message.edit_text("buying", reply_markup=None)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "sell_player")
+async def play_side_a(callback: types.CallbackQuery):
+    await callback.message.edit_text("selling", reply_markup=None)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "side-a")
+async def play_side_a(callback: types.CallbackQuery):
+    await callback.message.edit_text("A side", reply_markup=None)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "side-b")
+async def play_side_b(callback: types.CallbackQuery):
+    await callback.message.edit_text("B side", reply_markup=None)
+    await callback.answer()
+
+
 @router.callback_query(F.data == "mac-10")
 async def farm_mac10(callback: types.CallbackQuery):
-    await callback.message.edit_text("mac-10 used", reply_markup=None)
+    await callback.message.edit_text("mac-10 used", reply_markup=inline.choose_side_kb)
     await callback.answer()
 
 
 @router.callback_query(F.data == "ump-45")
 async def farm_ump_45(callback: types.CallbackQuery):
-    await callback.message.edit_text("ump used", reply_markup=None)
+    await callback.message.edit_text("ump used", reply_markup=inline.choose_side_kb)
     await callback.answer()
 
 
 @router.callback_query(F.data == "mp-7")
 async def farm_mp_7(callback: types.CallbackQuery):
-    await callback.message.edit_text("mp7 used", reply_markup=None)
+    await callback.message.edit_text("mp7 used", reply_markup=inline.choose_side_kb)
     await callback.answer()
 
 
