@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.1 (no postgresql)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/handlers/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/keyboards/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/inline.py" afterDir="false" />
-    </list>
+    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.1 (no postgresql)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,22 +34,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;refactoring&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Python/bot&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "refactoring",
+    "last_opened_file_path": "D:/Python/bot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Python\bot\core\handlers" />
@@ -90,7 +86,7 @@
       <workItem from="1696180638319" duration="411000" />
       <workItem from="1696757860269" duration="1616000" />
       <workItem from="1696784915545" duration="21000" />
-      <workItem from="1696878559740" duration="803000" />
+      <workItem from="1696878559740" duration="1159000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -124,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696758111267</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="v0.1 (no postgresql)">
+      <option name="closed" value="true" />
+      <created>1696879415139</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696879415139</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
