@@ -10,8 +10,9 @@ router = Router()
 
 
 @router.message(F.text == "💸 Баланс")
-async def get_balance(msg: Message):
-    await msg.answer(text.balance, reply_markup=kb.menu_kb)
+async def get_balance(msg: Message, request: Request):
+    await msg.answer(text.balance.format(user_balance=str(await request.get_balance(user_id=msg.from_user.id))),
+                     reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "💰 Купить/Продать игрока")
