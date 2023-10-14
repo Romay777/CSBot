@@ -7,11 +7,23 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from core.handlers.handlers import router
 from core.middlewares import config
+from core.middlewares.technical_breakup import TechnicalBreakUp
+from core.middlewares.dbmiddleware import DbSession
+import asyncpg
+
+
+async def create_pool():
+    return await asyncpg.create_pool(user='postgres', database='csbotdata',
+                                     host='localhost', port='5432',
+                                     password='Ggwpggwp1')
 
 
 async def main():
     bot = Bot(token=config.TOKEN, parse_mode=ParseMode.HTML)
+    pool_connect = await create_pool()
     dp = Dispatcher(storage=MemoryStorage())
+    dp.update.middleware.register(DbSession(pool_connect))
+    dp.message.middleware.register(TechnicalBreakUp())
     dp.include_router(router)
 
     await bot.delete_webhook(drop_pending_updates=True)

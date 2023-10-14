@@ -7,5 +7,3 @@ main_menu = [
     [KeyboardButton(text="🤑 Фармить")]
 ]
 menu_kb = ReplyKeyboardMarkup(keyboard=main_menu, resize_keyboard=True, input_field_placeholder="Выберите действие")
-
-

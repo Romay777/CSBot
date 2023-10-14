@@ -3,6 +3,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 
 from core.keyboards import kb, inline
+from core.utils.dbconnect import Request
 import text
 
 router = Router()
@@ -76,7 +77,8 @@ async def farm_mp_7(callback: types.CallbackQuery):
 
 
 @router.message(Command("start"))
-async def start_handler(msg: Message):
+async def get_start(msg: Message, request: Request):
+    await request.add_data(msg.from_user.id, msg.from_user.first_name)
     await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu_kb)
 
 
