@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.1 (no postgresql)">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/middlewares/technical_breakup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
+    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.2 (postgresql connected)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/handlers/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/handlers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/keyboards/kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/kb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/middlewares/dbmiddleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/dbconnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +100,7 @@
       <workItem from="1696784915545" duration="21000" />
       <workItem from="1696878559740" duration="1881000" />
       <workItem from="1696943239106" duration="4000" />
-      <workItem from="1697278196437" duration="9598000" />
+      <workItem from="1697278196437" duration="10842000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -159,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696879790583</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="v0.2 (postgresql connected)">
+      <option name="closed" value="true" />
+      <created>1697288208915</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697288208915</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,10 +178,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v0.2(postgresql WIP)" />
     <MESSAGE value="v0.1 (no postgresql)" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.1 (no postgresql)" />
+    <MESSAGE value="v0.2 (postgresql connected)" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2 (postgresql connected)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1697286892260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1697288047688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bot$handlers.coverage" NAME="handlers Coverage Results" MODIFIED="1697282155826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/handlers" />
     <SUITE FILE_PATH="coverage/bot$inline.coverage" NAME="inline Coverage Results" MODIFIED="1696879195007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/keyboards" />
     <SUITE FILE_PATH="coverage/bot$kb.coverage" NAME="kb Coverage Results" MODIFIED="1692466000798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
