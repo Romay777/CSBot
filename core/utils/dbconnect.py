@@ -12,4 +12,13 @@ class Request:
 
     async def get_balance(self, user_id):
         query = "SELECT balance FROM users WHERE user_id = $1"
-        return await self.connector.fetchval(query, user_id)
+        return str(await self.connector.fetchval(query, user_id))
+
+    async def get_all_players(self):
+        player = ''
+        total = await self.connector.fetchval("SELECT COUNT(*) FROM players")
+        for i in range(1, total):
+            player += ("<code>" +
+                       (await self.connector.fetchval("SELECT nickname from players where playerid = $1", i)
+                        + "</code> \n"))
+        return player
