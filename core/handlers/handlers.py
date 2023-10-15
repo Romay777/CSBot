@@ -11,7 +11,8 @@ router = Router()
 
 @router.message(F.text == "💸 Баланс")
 async def get_balance(msg: Message, request: Request):
-    await msg.answer(text.balance.format(user_balance=await request.get_balance(user_id=msg.from_user.id)),
+    balance = "{:,}".format(await request.get_balance(user_id=msg.from_user.id)).replace(',', "'")
+    await msg.answer(text.balance.format(user_balance=balance),
                      reply_markup=kb.menu_kb)
 
 
@@ -21,13 +22,13 @@ async def buy_sell_player(msg: Message):
 
 
 @router.message(F.text == "🎮 Моя команда")
-async def my_team(msg: Message):
-    await msg.answer(text.user_players, reply_markup=kb.menu_kb)
+async def my_team(msg: Message, request: Request):
+    await msg.answer(await request.get_user_team(msg.from_user.id), reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "👤 Список игроков")
 async def player_list(msg: Message, request: Request):
-    await msg.answer(str(await request.get_all_players()), reply_markup=kb.menu_kb)
+    await msg.answer(await request.get_all_players(), reply_markup=kb.menu_kb)
 
 
 @router.message(F.text == "🤑 Фармить")

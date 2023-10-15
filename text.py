@@ -10,8 +10,6 @@ farm = "Выберите оружие для фарма:"
 
 greet = "Привет, <b>{name}</b>!\nТебя приветствует игровой бот Counter-Strike! Здесь ты сможешь собрать свою команду."
 
-player_list = "placeholder"
-
-user_players = "Игроки вашей команды:"
+user_players = "Игроки вашей команды:\n{user_team}\nСредние навыки игроков: <b>{teamskill}</b>"
 
 unknown = "❔Команда не распознана"
