@@ -19,8 +19,8 @@ class Request:
         for i in range(1, total):
             player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_LIST_DATA, i)
 
-            players_info = (f"<code>{player_data['nickname']}</code>| "
-                            f"<b>{player_data['team']}</b>| "
+            players_info = (f"<code>{player_data['nickname']}</code> | "
+                            f"<b>{player_data['team']}</b> | "
                             f"""Цена: <b>${'{:,}'.format(int(player_data['price'])).replace(',', "'")}</b>\n""")
             players.append(players_info)
 
@@ -39,12 +39,14 @@ class Request:
         return text.user_players.format(user_team=team,
                                         teamskill=await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL, user_id))
 
-    async def get_user_team_nicknames(self, user_id, player_nickname="", choosing=False):
+    async def get_user_team_nicknames(self, user_id, choosing=False):
         if not choosing:
             team = []
             team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
             players = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
-            for player in players:
-                player_nickname = await self.connector.fetchval(dbqueries.GET_PLAYER_NICKNAME, team_data[player])
-                team.append(player_nickname)
+            for pl in players:
+                player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_NICK_PRICE, team_data[pl])
+                player = player_data['nickname']
+                player += (" [" + '{:,}'.format(int(player_data['price'])//3).replace(',', "'") + "]")
+                team.append(player)
             return team

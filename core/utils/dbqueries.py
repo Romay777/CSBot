@@ -9,8 +9,9 @@ GET_TOTAL_PLAYERS = "SELECT COUNT(*) FROM players"
 
 GET_PLAYER_LIST_DATA = "SELECT nickname, team, price FROM players WHERE playerid = $1"
 GET_PLAYER_TEAM_DATA = "SELECT nickname, role, price, skill FROM players WHERE playerid = $1"
+
 GET_PLAYER_ID = "SELECT playerid FROM players WHERE nickname = $1"
-GET_PLAYER_NICKNAME = "SELECT nickname FROM players WHERE playerid = $1"
+GET_PLAYER_NICK_PRICE = "SELECT price, nickname FROM players WHERE playerid = $1"
 
 
 

@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.2 (playerlist and user team set up)">
+    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.2.1 (refactoring keyboards)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/handlers/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/keyboards/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/inline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/keyboards/kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/kb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/dbconnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/dbqueries.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbqueries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +122,7 @@
       <workItem from="1696878559740" duration="1881000" />
       <workItem from="1696943239106" duration="4000" />
       <workItem from="1697278196437" duration="21181000" />
-      <workItem from="1697378676293" duration="12457000" />
+      <workItem from="1697378676293" duration="14375000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -217,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697389212675</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="v0.2.1 (refactoring keyboards)">
+      <option name="closed" value="true" />
+      <created>1697396485234</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1697396485234</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,10 +250,11 @@
     <MESSAGE value="v0.1 (no postgresql)" />
     <MESSAGE value="v0.2 (postgresql connected)" />
     <MESSAGE value="v0.2 (playerlist and user team set up)" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.2 (playerlist and user team set up)" />
+    <MESSAGE value="v0.2.1 (refactoring keyboards)" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2.1 (refactoring keyboards)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1697386115919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1697398124618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/bot$handlers.coverage" NAME="handlers Coverage Results" MODIFIED="1697282155826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/handlers" />
     <SUITE FILE_PATH="coverage/bot$inline.coverage" NAME="inline Coverage Results" MODIFIED="1696879195007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/keyboards" />
     <SUITE FILE_PATH="coverage/bot$kb.coverage" NAME="kb Coverage Results" MODIFIED="1692466000798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

@@ -1,9 +1,12 @@
 from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup)
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
+
 
 # Main menu
-main_menu = [
-    [KeyboardButton(text="💸 Баланс"), KeyboardButton(text="🎮 Моя команда")],
-    [KeyboardButton(text="👤 Список игроков"), KeyboardButton(text="💰 Купить/Продать игрока")],
-    [KeyboardButton(text="🤑 Фармить")]
-]
-menu_kb = ReplyKeyboardMarkup(keyboard=main_menu, resize_keyboard=True, input_field_placeholder="Выберите действие")
+def menu():
+    builder = ReplyKeyboardBuilder()
+    builder.button(text="💸 Баланс"), builder.button(text="🎮 Моя команда")
+    builder.button(text="👤 Список игроков"), builder.button(text="💰 Купить/Продать игрока")
+    builder.button(text="🤑 Фармить")
+    builder.adjust(2, 2, 1)
+    return builder.as_markup(resize_keyboard=True, input_field_placeholder="Выберите действие")

@@ -13,7 +13,7 @@ router = Router()
 async def get_balance(msg: Message, request: Request):
     balance = "{:,}".format(await request.get_balance(user_id=msg.from_user.id)).replace(',', "'")
     await msg.answer(text.balance.format(user_balance=balance),
-                     reply_markup=kb.menu_kb)
+                     reply_markup=kb.menu())
 
 
 @router.message(F.text == "💰 Купить/Продать игрока")
@@ -23,12 +23,12 @@ async def buy_sell_player(msg: Message):
 
 @router.message(F.text == "🎮 Моя команда")
 async def my_team(msg: Message, request: Request):
-    await msg.answer(await request.get_user_team(msg.from_user.id), reply_markup=kb.menu_kb)
+    await msg.answer(await request.get_user_team(msg.from_user.id), reply_markup=kb.menu())
 
 
 @router.message(F.text == "👤 Список игроков")
 async def player_list(msg: Message, request: Request):
-    await msg.answer(await request.get_all_players(), reply_markup=kb.menu_kb)
+    await msg.answer(await request.get_all_players(), reply_markup=kb.menu())
 
 
 @router.message(F.text == "🤑 Фармить")
@@ -44,9 +44,9 @@ async def play_side_a(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == "sell_player")
 async def play_side_a(callback: types.CallbackQuery, request: Request):
-    await callback.message.edit_text("Выберите игрока, которого хотите продать",
-                                     reply_markup=inline.get_nicknames_keyboard(
-                                         request.get_user_team_nicknames(callback.from_user.id)))
+    await callback.message.edit_text(
+        "Выберите игрока, которого хотите продать (указана сумма, которая вернется на баланс)",
+        reply_markup=inline.get_nicknames_keyboard(await request.get_user_team_nicknames(callback.from_user.id)))
     await callback.answer()
 
 
@@ -83,14 +83,14 @@ async def farm_mp_7(callback: types.CallbackQuery):
 @router.message(Command("start"))
 async def get_start(msg: Message, request: Request):
     await request.add_data(msg.from_user.id, msg.from_user.first_name)
-    await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu_kb)
+    await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu())
 
 
 @router.message(Command("globalelite"))
 async def author(msg: Message):
-    await msg.reply(text.author, reply_markup=kb.menu_kb)
+    await msg.reply(text.author, reply_markup=kb.menu())
 
 
 @router.message()
 async def message_handler(msg: Message):
-    await msg.answer(text.unknown, reply_markup=kb.menu_kb)
+    await msg.answer(text.unknown, reply_markup=kb.menu())
