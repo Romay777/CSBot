@@ -11,7 +11,7 @@ class Request:
         await self.connector.execute(dbqueries.ADD_DATA, user_id, user_name)
 
     async def get_balance(self, user_id):
-        return await self.connector.fetchval(dbqueries.GET_BALANCE, user_id)
+        return await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id)
 
     async def get_all_players(self):
         players = []
@@ -28,7 +28,7 @@ class Request:
 
     async def get_user_team(self, user_id):
         team = ""
-        team_data = await self.connector.fetchrow(dbqueries.GET_TEAM, user_id)
+        team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
         players = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
         for player in players:
             player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_TEAM_DATA, team_data[player])
@@ -37,4 +37,14 @@ class Request:
                             f"Его навыки: <b>{player_data['skill']}</b>\n")
             team += players_info
         return text.user_players.format(user_team=team,
-                                        teamskill=await self.connector.fetchval(dbqueries.GET_AVG_SKILL, user_id))
+                                        teamskill=await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL, user_id))
+
+    async def get_user_team_nicknames(self, user_id, player_nickname="", choosing=False):
+        if not choosing:
+            team = []
+            team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
+            players = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
+            for player in players:
+                player_nickname = await self.connector.fetchval(dbqueries.GET_PLAYER_NICKNAME, team_data[player])
+                team.append(player_nickname)
+            return team

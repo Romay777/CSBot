@@ -1,4 +1,6 @@
 from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup)
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+from core.utils import dbconnect
 
 # Buy / Sell player
 buy_sell = [
@@ -21,3 +23,11 @@ choose_side_list = [
     [InlineKeyboardButton(text="Rush \"B\"!🤬", callback_data="side-b")]
 ]
 choose_side_kb = InlineKeyboardMarkup(inline_keyboard=choose_side_list, resize_keyboard=True)
+
+
+async def get_inline_keyboard(nicknames):
+    dbconnect.Request.sell_player()
+    keyboard_builder = InlineKeyboardBuilder()
+    for i in range(0, 6):
+        keyboard_builder.button(text=nicknames[i], callback_data=nicknames[i])
+    return keyboard_builder.as_markup()

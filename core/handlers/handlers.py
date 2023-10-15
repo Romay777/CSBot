@@ -38,13 +38,14 @@ async def farming(msg: Message):
 
 @router.callback_query(F.data == "buy_player")
 async def play_side_a(callback: types.CallbackQuery):
-    await callback.message.edit_text("buying", reply_markup=None)
+    await callback.message.edit_text("Выберите игрока, которого ", reply_markup=None)
     await callback.answer()
 
 
 @router.callback_query(F.data == "sell_player")
-async def play_side_a(callback: types.CallbackQuery):
-    await callback.message.edit_text("selling", reply_markup=None)
+async def play_side_a(callback: types.CallbackQuery, request: Request):
+    await callback.message.edit_text("Выберите игрока, которого хотите продать", reply_markup=None)
+    #await request.get_user_team_nicknames(callback.from_user.id)
     await callback.answer()
 
 

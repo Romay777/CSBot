@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.2 (postgresql connected)">
-      <change afterPath="$PROJECT_DIR$/core/utils/dbqueries.py" afterDir="false" />
+    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.2 (playerlist and user team set up)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/handlers/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/keyboards/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/inline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/utils/dbconnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils/dbqueries.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbqueries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +30,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Romay777"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="96b1f049-c17e-4d07-82f4-4a65e02c8dd4" />
+        <option name="url" value="https://github.com/Romay777/CSBot.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/core/utils/dbqueries.py" root0="SKIP_INSPECTION" />
@@ -107,7 +121,7 @@
       <workItem from="1696878559740" duration="1881000" />
       <workItem from="1696943239106" duration="4000" />
       <workItem from="1697278196437" duration="21181000" />
-      <workItem from="1697378676293" duration="7347000" />
+      <workItem from="1697378676293" duration="10282000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -189,7 +203,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697296362043</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="v0.2 (playerlist and user team set up)">
+      <option name="closed" value="true" />
+      <created>1697386515648</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697386515648</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +232,8 @@
     <MESSAGE value="v0.2(postgresql WIP)" />
     <MESSAGE value="v0.1 (no postgresql)" />
     <MESSAGE value="v0.2 (postgresql connected)" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.2 (postgresql connected)" />
+    <MESSAGE value="v0.2 (playerlist and user team set up)" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.2 (playerlist and user team set up)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1697386115919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
