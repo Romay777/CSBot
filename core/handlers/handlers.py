@@ -18,7 +18,7 @@ async def get_balance(msg: Message, request: Request):
 
 @router.message(F.text == "💰 Купить/Продать игрока")
 async def buy_sell_player(msg: Message):
-    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=inline.buy_sell_kb)
+    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=inline.buy_sell_kb())
 
 
 @router.message(F.text == "🎮 Моя команда")
@@ -33,7 +33,7 @@ async def player_list(msg: Message, request: Request):
 
 @router.message(F.text == "🤑 Фармить")
 async def farming(msg: Message):
-    await msg.answer(text.farm, reply_markup=inline.farm_kb)
+    await msg.answer(text.farm, reply_markup=inline.farm_methods_kb())
 
 
 @router.callback_query(F.data == "buy_player")
@@ -44,8 +44,9 @@ async def play_side_a(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == "sell_player")
 async def play_side_a(callback: types.CallbackQuery, request: Request):
-    await callback.message.edit_text("Выберите игрока, которого хотите продать", reply_markup=None)
-    #await request.get_user_team_nicknames(callback.from_user.id)
+    await callback.message.edit_text("Выберите игрока, которого хотите продать",
+                                     reply_markup=inline.get_nicknames_keyboard(
+                                         request.get_user_team_nicknames(callback.from_user.id)))
     await callback.answer()
 
 
@@ -63,19 +64,19 @@ async def play_side_b(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == "mac-10")
 async def farm_mac10(callback: types.CallbackQuery):
-    await callback.message.edit_text("mac-10 used", reply_markup=inline.choose_side_kb)
+    await callback.message.edit_text("mac-10 used", reply_markup=inline.choose_side_kb())
     await callback.answer()
 
 
 @router.callback_query(F.data == "ump-45")
 async def farm_ump_45(callback: types.CallbackQuery):
-    await callback.message.edit_text("ump used", reply_markup=inline.choose_side_kb)
+    await callback.message.edit_text("ump used", reply_markup=inline.choose_side_kb())
     await callback.answer()
 
 
 @router.callback_query(F.data == "mp-7")
 async def farm_mp_7(callback: types.CallbackQuery):
-    await callback.message.edit_text("mp7 used", reply_markup=inline.choose_side_kb)
+    await callback.message.edit_text("mp7 used", reply_markup=inline.choose_side_kb())
     await callback.answer()
 
 

@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/handlers/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/keyboards/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/inline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/utils/dbconnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/utils/dbqueries.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbqueries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +119,7 @@
       <workItem from="1696878559740" duration="1881000" />
       <workItem from="1696943239106" duration="4000" />
       <workItem from="1697278196437" duration="21181000" />
-      <workItem from="1697378676293" duration="10282000" />
+      <workItem from="1697378676293" duration="12457000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -211,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697386515648</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="v0.2 (playerlist and user team set up)">
+      <option name="closed" value="true" />
+      <created>1697389212675</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1697389212675</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
