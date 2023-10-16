@@ -11,7 +11,7 @@ router = Router()
 
 @router.message(F.text == "💸 Баланс")
 async def get_balance(msg: Message, request: Request):
-    balance = "{:,}".format(await request.get_balance(user_id=msg.from_user.id)).replace(',', "'")
+    balance = await request.get_balance(user_id=msg.from_user.id)
     await msg.answer(text.balance.format(user_balance=balance),
                      reply_markup=kb.menu())
 
@@ -43,11 +43,20 @@ async def play_side_a(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "sell_player")
-async def play_side_a(callback: types.CallbackQuery, request: Request):
+async def sell_player_list_creation(callback: types.CallbackQuery, request: Request):
     await callback.message.edit_text(
         "Выберите игрока, которого хотите продать (указана сумма, которая вернется на баланс)",
         reply_markup=inline.get_nicknames_keyboard(await request.get_user_team_nicknames(callback.from_user.id)))
     await callback.answer()
+
+
+@router.callback_query(F.data.startswith('sell_'))
+async def selling_player(callback: types.CallbackQuery, request: Request):
+    player_nickname = callback.data.replace("sell_", "").split()[0]
+    await callback.message.edit_text(f"Продажа {player_nickname}...", reply_markup=None)
+    await callback.answer()
+    await callback.message.answer(await request.sell_player(user_id=callback.from_user.id, nickname=player_nickname),
+                                  reply_markup=kb.menu())
 
 
 @router.callback_query(F.data == "side-a")

@@ -1,5 +1,6 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from core.utils import dbconnect
+from core.utils.dbconnect import Request
+
 
 
 # Buy / Sell player
@@ -31,6 +32,6 @@ def choose_side_kb():
 def get_nicknames_keyboard(nicknames):
     builder = InlineKeyboardBuilder()
     for i in range(0, 5):
-        builder.button(text=nicknames[i], callback_data=nicknames[i])
+        builder.button(text=nicknames[i], callback_data="sell_" + nicknames[i])
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True)
