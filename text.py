@@ -14,5 +14,9 @@ user_players = "Игроки вашей команды:\n{user_team}\nСредн
 
 unknown = "❔Команда не распознана"
 
-player_sold = ("Игрок <b>{player_name}</b> продан!\nВаш новый баланс: $<b>{user_balance}</b>\n"
+player_sold = ("✅Игрок <b>{player_name}</b> продан✅\nВаш новый баланс: $<b>{user_balance}</b>\n"
                "Ваш новый средний навык команды: <b>{team_skill}</b>")
+player_bought = ("✅Игрок <b>{player_name}</b> успешно куплен✅\nВаш баланс: $<b>{user_balance}</b>\n"
+                 "Ваш новый средний навык команды: <b>{team_skill}</b>")
+not_enough_money = "❌ Недостаточно средств ❌"
+player_doesnt_exist = "❌ Игрока не существует ❌"

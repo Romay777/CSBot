@@ -1,6 +1,7 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from core.utils.dbconnect import Request
 
+pos_s = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
 
 
 # Buy / Sell player
@@ -8,6 +9,14 @@ def buy_sell_kb():
     builder = InlineKeyboardBuilder()
     builder.button(text="Купить", callback_data="buy_player")
     builder.button(text="Продать", callback_data="sell_player")
+    return builder.as_markup(resize_keyboard=True)
+
+
+def position_list(positions):
+    builder = InlineKeyboardBuilder()
+    for pos in pos_s:
+        if positions[pos] == 0:
+            builder.button(text=f'{pos_s.index(pos)+1}', callback_data=f"buy_on_{pos}")
     return builder.as_markup(resize_keyboard=True)
 
 

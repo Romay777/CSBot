@@ -14,9 +14,12 @@ GET_PLAYER_LIST_DATA = "SELECT nickname, team, price FROM players WHERE playerid
 GET_PLAYER_TEAM_DATA = "SELECT nickname, role, price, skill FROM players WHERE playerid = $1"
 
 GET_PLAYER_ID_PRICE_BY_NICKNAME = "SELECT playerid, price FROM players WHERE nickname = $1"
+GET_PLAYER_ID_BY_NICKNAME = "SELECT playerid FROM players WHERE nickname = $1"
+GET_PLAYER_PRICE_BY_PLAYERID = "SELECT price FROM players WHERE playerid = $1"
 GET_PLAYER_NICK_PRICE = "SELECT price, nickname FROM players WHERE playerid = $1"
 GET_PLAYER_SKILL = "SELECT skill FROM players WHERE playerid = $1"
 
 
 USER_AVGSKILL_UPDATE = "UPDATE users SET avgskill = $1 where user_id = $2"
 USER_BALANCE_UPDATE = "UPDATE users SET balance = $1 where user_id = $2"
+USER_BUY_SET_PLAYER = "UPDATE users SET $1 = $2 where user_id = $3"
