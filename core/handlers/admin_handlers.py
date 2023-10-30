@@ -2,11 +2,12 @@ from aiogram import F, Router
 from aiogram.types import Message
 
 from core.keyboards import kb
+from core.middlewares.config import ADMIN_ID
 import text
 
 router = Router()
 router.message.filter(
-    F.from_user.id == 880825017
+    F.from_user.id == ADMIN_ID
 )
 
 
