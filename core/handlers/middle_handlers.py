@@ -1,6 +1,5 @@
-from aiogram import types, F, Router
+from aiogram import types, F, Router, html
 from aiogram.types import Message
-from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 from core.keyboards import kb, inline
@@ -11,31 +10,22 @@ import text
 router = Router()
 
 
-@router.message(F.text == "💸 Баланс")
-async def get_balance(msg: Message, request: Request):
-    balance = await request.get_balance(user_id=msg.from_user.id)
-    await msg.answer(text.balance.format(user_balance=balance),
-                     reply_markup=kb.menu())
+@router.callback_query(F.data == "gun_choosed")
+async def farm_gun_choosed(callback: types.CallbackQuery):
+    await callback.message.edit_text(text.farm_choose_side, reply_markup=inline.choose_side_kb())
+    await callback.answer()
 
 
-@router.message(F.text == "💰 Купить/Продать игрока")
-async def buy_sell_player(msg: Message):
-    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=inline.buy_sell_kb())
-
-
-@router.message(F.text == "🎮 Моя команда")
-async def my_team(msg: Message, request: Request):
-    await msg.answer(await request.get_user_team(msg.from_user.id), reply_markup=kb.menu())
-
-
-@router.message(F.text == "👤 Список игроков")
-async def player_list(msg: Message, request: Request):
-    await msg.answer(await request.get_all_players(), reply_markup=kb.menu())
-
-
-@router.message(F.text == "🤑 Фармить")
-async def farming(msg: Message):
-    await msg.answer(text.farm, reply_markup=inline.farm_methods_kb())
+@router.callback_query(F.data == "side_choosed")
+async def play_side_a(callback: types.CallbackQuery, state: FSMContext, request: Request):
+    if not "True" == (await state.get_data()).get('playing'):
+        await state.set_state(StepsForm.IS_PLAYING)
+        await state.update_data(playing="True")
+        await callback.answer()
+        await callback.message.edit_text(await request.farming(callback.from_user.id, callback))
+        await state.clear()
+    else:
+        await callback.message.edit_text(text.farm_already_playing)
 
 
 @router.callback_query(F.data == "buy_player")
@@ -66,8 +56,9 @@ async def buy_player_nickname_got(message: Message, request: Request, state: FSM
         if buying_player_id == pl_id:
             await message.answer("Данный игрок уже в вашей команде.")
             player_found = True
+            break
     if not player_found:
-        await message.answer(f"Запрос на покупку игрока <b>{message.text}...</b>")
+        await message.answer(f"Запрос на покупку игрока {html.bold(html.quote(message.text))}...")
         await message.answer(await request.buy_player(message.from_user.id, position, message.text))
 
 
@@ -86,49 +77,3 @@ async def selling_player(callback: types.CallbackQuery, request: Request):
     await callback.answer()
     await callback.message.answer(await request.sell_player(user_id=callback.from_user.id, nickname=player_nickname),
                                   reply_markup=kb.menu())
-
-
-@router.callback_query(F.data == "side-a")
-async def play_side_a(callback: types.CallbackQuery):
-    await callback.message.edit_text("A side", reply_markup=None)
-    await callback.answer()
-
-
-@router.callback_query(F.data == "side-b")
-async def play_side_b(callback: types.CallbackQuery):
-    await callback.message.edit_text("B side", reply_markup=None)
-    await callback.answer()
-
-
-@router.callback_query(F.data == "mac-10")
-async def farm_mac10(callback: types.CallbackQuery):
-    await callback.message.edit_text("mac-10 used", reply_markup=inline.choose_side_kb())
-    await callback.answer()
-
-
-@router.callback_query(F.data == "ump-45")
-async def farm_ump_45(callback: types.CallbackQuery):
-    await callback.message.edit_text("ump used", reply_markup=inline.choose_side_kb())
-    await callback.answer()
-
-
-@router.callback_query(F.data == "mp-7")
-async def farm_mp_7(callback: types.CallbackQuery):
-    await callback.message.edit_text("mp7 used", reply_markup=inline.choose_side_kb())
-    await callback.answer()
-
-
-@router.message(Command("start"))
-async def get_start(msg: Message, request: Request):
-    await request.add_data(msg.from_user.id, msg.from_user.first_name)
-    await msg.answer(text.greet.format(name=msg.from_user.first_name), reply_markup=kb.menu())
-
-
-@router.message(Command("globalelite"))
-async def author(msg: Message):
-    await msg.reply(text.author, reply_markup=kb.menu())
-
-
-@router.message()
-async def message_handler(msg: Message):
-    await msg.answer(text.unknown, reply_markup=kb.menu())

@@ -22,4 +22,5 @@ GET_PLAYER_SKILL = "SELECT skill FROM players WHERE playerid = $1"
 
 USER_AVGSKILL_UPDATE = "UPDATE users SET avgskill = $1 where user_id = $2"
 USER_BALANCE_UPDATE = "UPDATE users SET balance = $1 where user_id = $2"
+USER_BALANCE_UPDATE_ADD = "UPDATE users SET balance = balance + $1 WHERE user_id = $2"
 USER_BUY_SET_PLAYER = "UPDATE users SET $1 = $2 where user_id = $3"

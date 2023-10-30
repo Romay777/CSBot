@@ -23,17 +23,17 @@ def position_list(positions):
 # List of farm methods
 def farm_methods_kb():
     builder = InlineKeyboardBuilder()
-    builder.button(text="MAC-10", callback_data="mac-10")
-    builder.button(text="UMP-45", callback_data="ump-45")
-    builder.button(text="MP-7", callback_data="mp-7")
+    builder.button(text="MAC-10", callback_data="gun_choosed")
+    builder.button(text="UMP-45", callback_data="gun_choosed")
+    builder.button(text="MP-7", callback_data="gun_choosed")
     return builder.as_markup(resize_keyboard=True)
 
 
 # List of Sides [A/B]
 def choose_side_kb():
     builder = InlineKeyboardBuilder()
-    builder.button(text="Медленно \"A!\"\U0001F977", callback_data="side-a")  # Ninja emoji here
-    builder.button(text="Rush \"B\"!🤬", callback_data="side-b")
+    builder.button(text="Медленно \"A!\"\U0001F977", callback_data="side_choosed")  # Ninja emoji here
+    builder.button(text="Rush \"B!\"🤬", callback_data="side_choosed")
     return builder.as_markup(resize_keyboard=True)
 
 

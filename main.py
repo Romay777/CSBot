@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums.parse_mode import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from core.handlers.handlers import router
+from core.handlers import middle_handlers, commands, main_kb_instant_answers, admin_handlers
 from core.middlewares import config
 from core.middlewares.dbmiddleware import DbSession
 import asyncpg
@@ -22,7 +22,7 @@ async def main():
     pool_connect = await create_pool()
     dp = Dispatcher(storage=MemoryStorage())
     dp.update.middleware.register(DbSession(pool_connect))
-    dp.include_router(router)
+    dp.include_routers(main_kb_instant_answers.router, middle_handlers.router, admin_handlers.router, commands.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     try:
