@@ -3,6 +3,7 @@ ADD_DATA = ("INSERT INTO users (user_id, user_name) "
 
 GET_USER_TEAM = "SELECT playerone, playertwo, playerthree, playerfour, playerfive FROM users WHERE user_id = $1"
 GET_USER_BALANCE = "SELECT balance FROM users WHERE user_id = $1"
+GET_USER_TEAM_ALL_SKILL = "SELECT sum(skill) FROM players WHERE playerid in ($1, $2, $3, $4, $5)"
 GET_USER_AVG_SKILL = "SELECT avgskill FROM users WHERE user_id = $1"
 GET_USER_PLAYER_POSITION = """SELECT CASE WHEN playerone = $1 THEN 'playerone' WHEN playertwo = $1 THEN 'playertwo' 
 WHEN playerthree = $1 THEN 'playerthree' WHEN playerfour = $1 THEN 'playerfour' WHEN playerfive = $1 THEN 'playerfive'

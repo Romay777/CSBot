@@ -21,11 +21,11 @@ async def play_side_a(callback: types.CallbackQuery, state: FSMContext, request:
     if not "True" == (await state.get_data()).get('playing'):
         await state.set_state(StepsForm.IS_PLAYING)
         await state.update_data(playing="True")
-        await callback.answer()
         await callback.message.edit_text(await request.farming(callback.from_user.id, callback))
         await state.clear()
     else:
         await callback.message.edit_text(text.farm_already_playing)
+    await callback.answer()
 
 
 @router.callback_query(F.data == "buy_player")
@@ -51,15 +51,12 @@ async def buy_player_nickname_got(message: Message, request: Request, state: FSM
     position = (await state.get_data()).get('position')
     await state.clear()
     buying_player_id = await request.get_player_id_by_nickname(message.text)
-    player_found = False
     for pl_id in await request.get_user_position_ids_only(message.from_user.id):
         if buying_player_id == pl_id:
             await message.answer("Данный игрок уже в вашей команде.")
-            player_found = True
-            break
-    if not player_found:
-        await message.answer(f"Запрос на покупку игрока {html.bold(html.quote(message.text))}...")
-        await message.answer(await request.buy_player(message.from_user.id, position, message.text))
+            return
+    await message.answer(f"Запрос на покупку игрока {html.bold(html.quote(message.text))}...")
+    await message.answer(await request.buy_player(message.from_user.id, position, message.text))
 
 
 @router.callback_query(F.data == "sell_player")

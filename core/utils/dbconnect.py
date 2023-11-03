@@ -41,22 +41,22 @@ class Request:
 
     async def get_user_team_nicknames(self, user_id):
         team = []
-        team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
+        team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)  # id игроков из команды
 
         for pl in DEFAULT_PLAYERS:
-            player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_NICK_PRICE, team_data[pl])
+            player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_NICK_PRICE, team_data[pl])  # price+nickpos
             player = f"""{player_data['nickname']} [""" + f"""{'{:,}'.format(int(player_data['price']) // 3)
             .replace(',', "'")}]"""
-            # player += (" [" + '{:,}'.format(int(player_data['price']) // 3).replace(',', "'") + "]") хз чо это
+            # player += (" [" + '{:,}'.format(int(player_data['price']) // 3).replace(',', "'") + "]")
+            # хз чо это лучше не удалять
             team.append(player)
 
         return team
 
     async def update_user_avgskill(self, user_id):
-        skillsum = 0
         players_ids = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
-        for i in range(5):
-            skillsum += await self.connector.fetchval(dbqueries.GET_PLAYER_SKILL, players_ids[i])
+        skillsum = await self.connector.fetchval(dbqueries.GET_USER_TEAM_ALL_SKILL, players_ids[0], players_ids[1],
+                                                 players_ids[2], players_ids[3], players_ids[4])
         await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, skillsum // 5, user_id)
 
     async def farming(self, user_id, callback: types.CallbackQuery):
@@ -69,7 +69,7 @@ class Request:
         result = 5000 if success_out else 2000
         await callback.message.edit_text(current_msg_text)
         await sleep(1.3)
-        # TODO Вычисления выигрыша и результата нужно усложнить!
+        # TODO Вычисления выигрыша и результата нужно усложнить
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE_ADD, result, user_id)
         return text.farm_result.format(result=result,
                                        user_balance=await self.get_balance(user_id))
@@ -92,16 +92,15 @@ class Request:
                                        team_skill=await self.get_avgskill(user_id))
 
     async def buy_player(self, user_id, position, nickname):
-        player_id = await self.connector.fetchval(dbqueries.GET_PLAYER_ID_BY_NICKNAME, nickname)
-        if player_id is None:
+        player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_ID_PRICE_BY_NICKNAME, nickname)
+        if player_data['playerid'] is None:
             return text.player_doesnt_exist
         query = f"UPDATE users SET {position} = $1 where user_id = $2"
-        new_balance = (await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id) -
-                       int(await self.connector.fetchval(dbqueries.GET_PLAYER_PRICE_BY_PLAYERID, player_id)))
+        new_balance = (await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id) - int(player_data['price']))
         if new_balance < 0:
             return text.not_enough_money
 
-        await self.connector.execute(query, player_id, user_id)
+        await self.connector.execute(query, player_data['playerid'], user_id)
         await self.update_user_avgskill(user_id)
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE, new_balance, user_id)
         return text.player_bought.format(player_name=nickname,
