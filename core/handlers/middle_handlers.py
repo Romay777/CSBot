@@ -2,7 +2,7 @@ from aiogram import types, F, Router, html
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
-from core.keyboards import kb, inline
+from core.keyboards import inline
 from core.utils.dbconnect import Request
 from core.utils.statesform import StepsForm
 import text
@@ -46,7 +46,7 @@ async def buy_player_waiting_nickname(callback: types.CallbackQuery, state: FSMC
     await state.update_data(position=callback.data.replace("buy_on_", ""))
 
 
-@router.message(StepsForm.GET_NICKNAME)
+@router.message(StepsForm.GET_NICKNAME)  # Если состояние = ожидание никнейма
 async def buy_player_nickname_got(message: Message, request: Request, state: FSMContext):
     position = (await state.get_data()).get('position')
     await state.clear()
@@ -62,15 +62,17 @@ async def buy_player_nickname_got(message: Message, request: Request, state: FSM
 @router.callback_query(F.data == "sell_player")
 async def sell_player_list_creation(callback: types.CallbackQuery, request: Request):
     await callback.message.edit_text(
-        "Выберите игрока, которого хотите продать (указана сумма, которая вернется на баланс)",
-        reply_markup=inline.get_nicknames_keyboard(await request.get_user_team_nicknames(callback.from_user.id)))
+        "Выберите игрока, которого хотите продать\n(указана сумма, которая вернется на баланс)",
+        reply_markup=inline.get_nicknames_keyboard(await request.get_user_team_nicknames_prices(callback.from_user.id)))
     await callback.answer()
 
 
 @router.callback_query(F.data.startswith('sell_'))
 async def selling_player(callback: types.CallbackQuery, request: Request):
     player_nickname = callback.data.replace("sell_", "").split()[0]
-    await callback.message.edit_text(f"Продажа {player_nickname}...", reply_markup=None)
     await callback.answer()
-    await callback.message.answer(await request.sell_player(user_id=callback.from_user.id, nickname=player_nickname),
-                                  reply_markup=kb.menu())
+    if player_nickname == "Noob":
+        await callback.message.edit_text("Нубика нельзя продать 🧐")
+        return
+    await callback.message.edit_text(f"Продажа {player_nickname}...", reply_markup=None)
+    await callback.message.edit_text(await request.sell_player(user_id=callback.from_user.id, nickname=player_nickname))

@@ -39,18 +39,19 @@ class Request:
     async def get_user_position_ids_only(self, user_id):
         return await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
 
-    async def get_user_team_nicknames(self, user_id):
+    async def get_user_team_nicknames_prices(self, user_id):
         team = []
-        team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)  # id игроков из команды
-
-        for pl in DEFAULT_PLAYERS:
-            player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_NICK_PRICE, team_data[pl])  # price+nickpos
-            player = f"""{player_data['nickname']} [""" + f"""{'{:,}'.format(int(player_data['price']) // 3)
+        team_data = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)  # id игроков из команды (team_data)
+        query = f"""SELECT price, nickname FROM players JOIN (VALUES 
+                                        ({team_data['playerone']}), ({team_data['playertwo']}),
+                                        ({team_data['playerthree']}), ({team_data['playerfour']}),
+                                        ({team_data['playerfive']})) AS ids (playerid)
+                                        ON players.playerid = ids.playerid;"""
+        players_data = await self.connector.fetch(query)
+        for i in range(5):
+            player = f"""{players_data[i]['nickname']} [""" + f"""{'{:,}'.format(int(players_data[i]['price']) // 3)
             .replace(',', "'")}]"""
-            # player += (" [" + '{:,}'.format(int(player_data['price']) // 3).replace(',', "'") + "]")
-            # хз чо это лучше не удалять
             team.append(player)
-
         return team
 
     async def update_user_avgskill(self, user_id):

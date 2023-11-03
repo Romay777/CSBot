@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.4 (some lil fixes &amp; trash removal)">
+    <list default="true" id="258b5bab-d585-4aa1-bd72-02da06ef31a6" name="Changes" comment="v0.4 (db connection optimizations)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/handlers/middle_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/handlers/middle_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/keyboards/inline.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/keyboards/inline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/utils/dbconnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbconnect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/utils/dbqueries.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/dbqueries.py" afterDir="false" />
     </list>
@@ -152,7 +153,7 @@
       <workItem from="1698419375427" duration="3953000" />
       <workItem from="1698598069593" duration="9263000" />
       <workItem from="1698667917773" duration="6384000" />
-      <workItem from="1699001842271" duration="2549000" />
+      <workItem from="1699001842271" duration="7328000" />
     </task>
     <task id="LOCAL-00001" summary="v0.2(postgresql WIP)">
       <option name="closed" value="true" />
@@ -298,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698673579897</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="v0.4 (db connection optimizations)">
+      <option name="closed" value="true" />
+      <created>1699004527348</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699004527348</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,10 +335,11 @@
     <MESSAGE value="v0.3 (all but farm)" />
     <MESSAGE value="v0.4 (TODO farm)" />
     <MESSAGE value="v0.4 (some lil fixes &amp; trash removal)" />
-    <option name="LAST_COMMIT_MESSAGE" value="v0.4 (some lil fixes &amp; trash removal)" />
+    <MESSAGE value="v0.4 (db connection optimizations)" />
+    <option name="LAST_COMMIT_MESSAGE" value="v0.4 (db connection optimizations)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1699003626068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bot$main.coverage" NAME="main Coverage Results" MODIFIED="1699008743573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bot$handlers.coverage" NAME="handlers Coverage Results" MODIFIED="1697282155826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/handlers" />
     <SUITE FILE_PATH="coverage/bot$inline.coverage" NAME="inline Coverage Results" MODIFIED="1696879195007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/core/keyboards" />
     <SUITE FILE_PATH="coverage/bot$kb.coverage" NAME="kb Coverage Results" MODIFIED="1692466000798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

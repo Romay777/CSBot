@@ -1,5 +1,4 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from core.utils.dbconnect import Request
 
 pos_s = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
 
@@ -40,7 +39,7 @@ def choose_side_kb():
 # Keyboard that shows user's players
 def get_nicknames_keyboard(nicknames):
     builder = InlineKeyboardBuilder()
-    for i in range(0, 5):
+    for i in range(5):
         builder.button(text=nicknames[i], callback_data="sell_" + nicknames[i])
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True)
