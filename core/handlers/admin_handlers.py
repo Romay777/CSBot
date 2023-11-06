@@ -3,7 +3,6 @@ from aiogram.types import Message
 
 from core.keyboards import kb
 from core.middlewares.config import ADMIN_ID
-import text
 
 router = Router()
 router.message.filter(
@@ -12,6 +11,6 @@ router.message.filter(
 
 
 @router.message(F.text == "admin")
-async def admin_panel(msg: Message):
+async def reveal_admin_panel(msg: Message):
     await msg.answer("[admin panel revealed]", reply_markup=kb.admin_panel())
 

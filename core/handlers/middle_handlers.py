@@ -11,13 +11,13 @@ router = Router()
 
 
 @router.callback_query(F.data == "gun_choosed")
-async def farm_gun_choosed(callback: types.CallbackQuery):
-    await callback.message.edit_text(text.farm_choose_side, reply_markup=inline.choose_side_kb())
+async def choosing_side_edit(callback: types.CallbackQuery):
+    await callback.message.edit_text(text.farm_choose_side, reply_markup=await inline.get_side_choice())
     await callback.answer()
 
 
 @router.callback_query(F.data == "side_choosed")
-async def play_side_a(callback: types.CallbackQuery, state: FSMContext, request: Request):
+async def start_farm(callback: types.CallbackQuery, state: FSMContext, request: Request):
     if not "True" == (await state.get_data()).get('playing'):
         await state.set_state(StepsForm.IS_PLAYING)
         await state.update_data(playing="True")
@@ -32,7 +32,7 @@ async def play_side_a(callback: types.CallbackQuery, state: FSMContext, request:
 async def buy_player_list_creation(callback: types.CallbackQuery, request: Request):
     positions = await request.get_user_position_ids_only(callback.from_user.id)
     await callback.message.edit_text("Выберите, на какую позицию хотите установить игрока:",
-                                     reply_markup=inline.position_list(positions))
+                                     reply_markup=await inline.get_position_list(positions))
     await callback.answer()
 
 
@@ -59,11 +59,17 @@ async def buy_player_nickname_got(message: Message, request: Request, state: FSM
     await message.answer(await request.buy_player(message.from_user.id, position, message.text))
 
 
+@router.callback_query(F.data == "close_message")
+async def close_message(callback: types.CallbackQuery):
+    await callback.answer()
+    await callback.message.delete()
+
+
 @router.callback_query(F.data == "sell_player")
 async def sell_player_list_creation(callback: types.CallbackQuery, request: Request):
     await callback.message.edit_text(
         "Выберите игрока, которого хотите продать\n(указана сумма, которая вернется на баланс)",
-        reply_markup=inline.get_nicknames_keyboard(await request.get_user_team_nicknames_prices(callback.from_user.id)))
+        reply_markup=await inline.get_nicknames_keyboard(await request.get_user_team_nicknames_prices(callback.from_user.id)))
     await callback.answer()
 
 

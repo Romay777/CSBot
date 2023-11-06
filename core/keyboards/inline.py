@@ -4,23 +4,28 @@ pos_s = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
 
 
 # Buy / Sell player
-def buy_sell_kb():
+async def get_buy_sell_kb():
     builder = InlineKeyboardBuilder()
     builder.button(text="Купить", callback_data="buy_player")
     builder.button(text="Продать", callback_data="sell_player")
     return builder.as_markup(resize_keyboard=True)
 
 
-def position_list(positions):
+# List of available positions
+async def get_position_list(positions):
     builder = InlineKeyboardBuilder()
+    has_free_pos = False
     for pos in pos_s:
         if positions[pos] == 0:
-            builder.button(text=f'{pos_s.index(pos)+1}', callback_data=f"buy_on_{pos}")
+            builder.button(text=f"{pos_s.index(pos)+1}", callback_data=f"buy_on_{pos}")
+            has_free_pos = True
+    if not has_free_pos:
+        builder.button(text="Нет доступных позиций\n[закрыть]", callback_data="close_message")
     return builder.as_markup(resize_keyboard=True)
 
 
 # List of farm methods
-def farm_methods_kb():
+async def get_farm_methods():
     builder = InlineKeyboardBuilder()
     builder.button(text="MAC-10", callback_data="gun_choosed")
     builder.button(text="UMP-45", callback_data="gun_choosed")
@@ -29,7 +34,7 @@ def farm_methods_kb():
 
 
 # List of Sides [A/B]
-def choose_side_kb():
+async def get_side_choice():
     builder = InlineKeyboardBuilder()
     builder.button(text="Медленно \"A!\"\U0001F977", callback_data="side_choosed")  # Ninja emoji here
     builder.button(text="Rush \"B!\"🤬", callback_data="side_choosed")
@@ -37,7 +42,7 @@ def choose_side_kb():
 
 
 # Keyboard that shows user's players
-def get_nicknames_keyboard(nicknames):
+async def get_nicknames_keyboard(nicknames):
     builder = InlineKeyboardBuilder()
     for i in range(5):
         builder.button(text=nicknames[i], callback_data="sell_" + nicknames[i])

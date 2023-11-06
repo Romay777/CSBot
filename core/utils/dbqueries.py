@@ -18,7 +18,7 @@ GET_PLAYER_LIST_DATA = "SELECT nickname, team, price FROM players WHERE playerid
 GET_PLAYER_TEAM_DATA = "SELECT nickname, role, price, skill FROM players WHERE playerid = $1"
 
 GET_PLAYER_ID_PRICE_BY_NICKNAME = "SELECT playerid, price FROM players WHERE nickname = $1"
-GET_PLAYER_ID_BY_NICKNAME = "SELECT playerid FROM players WHERE nickname = $1"
+GET_PLAYER_ID_BY_NICKNAME = "SELECT playerid FROM players WHERE LOWER(nickname) = LOWER($1)"
 GET_PLAYER_PRICE_BY_PLAYERID = "SELECT price FROM players WHERE playerid = $1"
 GET_PLAYER_NICK_PRICE = "SELECT price, nickname FROM players WHERE playerid = $1"
 GET_PLAYER_SKILL = "SELECT skill FROM players WHERE playerid = $1"

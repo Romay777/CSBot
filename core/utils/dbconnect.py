@@ -56,9 +56,9 @@ class Request:
 
     async def update_user_avgskill(self, user_id):
         players_ids = await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
-        skillsum = await self.connector.fetchval(dbqueries.GET_USER_TEAM_ALL_SKILL, players_ids[0], players_ids[1],
-                                                 players_ids[2], players_ids[3], players_ids[4])
-        await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, skillsum // 5, user_id)
+        avgskill = await self.connector.fetchval(dbqueries.GET_USER_TEAM_ALL_SKILL, players_ids[0], players_ids[1],
+                                                 players_ids[2], players_ids[3], players_ids[4]) // 5
+        await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, avgskill, user_id)
 
     async def farming(self, user_id, callback: types.CallbackQuery):
         await callback.message.edit_text("Коллим стратегию...", reply_markup=None)
@@ -96,15 +96,15 @@ class Request:
         player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_ID_PRICE_BY_NICKNAME, nickname)
         if player_data['playerid'] is None:
             return text.player_doesnt_exist
-        query = f"UPDATE users SET {position} = $1 where user_id = $2"
+        query = f"UPDATE users SET {position} = {player_data['playerid']} where user_id = {user_id}"
         new_balance = (await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id) - int(player_data['price']))
         if new_balance < 0:
             return text.not_enough_money
 
-        await self.connector.execute(query, player_data['playerid'], user_id)
+        await self.connector.execute(query)
         await self.update_user_avgskill(user_id)
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE, new_balance, user_id)
-        return text.player_bought.format(player_name=nickname,
+        return text.player_bought.format(player_name=nickname.lower(),
                                          user_balance='{:,}'.format(new_balance).replace(",", "'"),
                                          team_skill=await self.get_avgskill(user_id))
 

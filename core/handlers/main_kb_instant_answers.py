@@ -14,20 +14,20 @@ async def get_balance(msg: Message, request: Request):
 
 
 @router.message(F.text == "🤑 Фармить")
-async def farming(msg: Message):
-    await msg.answer(text.farm, reply_markup=inline.farm_methods_kb())
+async def start_farming(msg: Message):
+    await msg.answer(text.farm, reply_markup=await inline.get_farm_methods())
 
 
 @router.message(F.text == "💰 Купить/Продать игрока")
 async def buy_sell_player(msg: Message):
-    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=inline.buy_sell_kb())
+    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=await inline.get_buy_sell_kb())
 
 
 @router.message(F.text == "🎮 Моя команда")
-async def my_team(msg: Message, request: Request):
+async def my_team_reveal(msg: Message, request: Request):
     await msg.answer(await request.get_user_team(msg.from_user.id))
 
 
 @router.message(F.text == "👤 Список игроков")
-async def player_list(msg: Message, request: Request):
+async def player_list_reveal(msg: Message, request: Request):
     await msg.answer(await request.get_all_players())
