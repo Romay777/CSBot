@@ -7,10 +7,14 @@ GET_USER_TEAM_ALL_SKILL = "SELECT sum(skill) FROM players WHERE playerid in ($1,
 GET_USER_TEAM_NICKS_PRICES = """SELECT price, nickname FROM players 
                                 JOIN (VALUES ($1), ($2), ($3), ($4), ($5)) AS ids (playerid) 
                                 ON players.playerid = ids.playerid;"""
-GET_USER_AVG_SKILL = "SELECT avgskill FROM users WHERE user_id = $1"
+GET_USER_AVG_SKILL_BY_USER_ID = "SELECT avgskill FROM users WHERE user_id = $1"
 GET_USER_PLAYER_POSITION = """SELECT CASE WHEN playerone = $1 THEN 'playerone' WHEN playertwo = $1 THEN 'playertwo' 
                                 WHEN playerthree = $1 THEN 'playerthree' WHEN playerfour = $1 THEN 'playerfour' WHEN playerfive = $1 THEN 'playerfive'
                                 ELSE 'No match' END AS matched_column FROM users WHERE user_id = $2"""
+GET_USER_TEAM_RANDOM_PLAYER_BY_USER_ID = """SELECT p.nickname FROM (SELECT CASE WHEN random_number < 0.2 THEN playerone
+WHEN random_number < 0.4 THEN playertwo WHEN random_number < 0.6 THEN playerthree WHEN random_number < 0.8 THEN playerfour ELSE playerfive
+END AS random_player FROM users, (SELECT RANDOM() AS random_number) AS subquery WHERE user_id = $1) 
+AS u JOIN players p ON p.playerid = u.random_player;"""
 
 GET_TOTAL_PLAYERS = "SELECT COUNT(*) FROM players"
 

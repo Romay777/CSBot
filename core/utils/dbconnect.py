@@ -1,10 +1,9 @@
 import asyncpg
-from random import getrandbits, uniform
 from aiogram import types
-from asyncio import sleep
 
 import text
 from core.utils import dbqueries
+from core.middlewares import farming
 
 DEFAULT_PLAYERS = ['playerone', 'playertwo', 'playerthree', 'playerfour', 'playerfive']
 
@@ -21,7 +20,7 @@ class Request:
             ',', "'")
 
     async def get_avgskill(self, user_id):
-        return await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL, user_id)
+        return await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL_BY_USER_ID, user_id)
 
     async def get_user_team(self, user_id):
         team = ""
@@ -34,7 +33,8 @@ class Request:
                             f"\nНавыки: <b>{player_data['skill']}</b>\n")
             team += players_info
         return text.user_players.format(user_team=team,
-                                        teamskill=await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL, user_id))
+                                        teamskill=await self.connector.fetchval(dbqueries.GET_USER_AVG_SKILL_BY_USER_ID,
+                                                                                user_id))
 
     async def get_user_position_ids_only(self, user_id):
         return await self.connector.fetchrow(dbqueries.GET_USER_TEAM, user_id)
@@ -61,19 +61,13 @@ class Request:
         await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, avgskill, user_id)
 
     async def farming(self, user_id, callback: types.CallbackQuery):
-        await callback.message.edit_text("Коллим стратегию...", reply_markup=None)
-        await sleep(round(uniform(1.1, 2.5), 1))
-        await callback.message.edit_text("Заходим на точку...")
-        await sleep(round(uniform(1.1, 2.5), 1))
-        success_out = getrandbits(1)
-        current_msg_text = "Удачный entry-kill!🔥" if success_out else "Ошибка от нашего фраггера💢"
-        result = 5000 if success_out else 2000
-        await callback.message.edit_text(current_msg_text)
-        await sleep(1.3)
-        # TODO Вычисления выигрыша и результата нужно усложнить
+        result = await farming.default_farm(user_id, callback, self)
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE_ADD, result, user_id)
         return text.farm_result.format(result=result,
                                        user_balance=await self.get_balance(user_id))
+
+    async def get_random_team_player(self, user_id):
+        return await self.connector.fetchval(dbqueries.GET_USER_TEAM_RANDOM_PLAYER_BY_USER_ID, user_id)
 
     async def sell_player(self, user_id, nickname):
         player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_ID_PRICE_BY_NICKNAME, nickname)
@@ -85,7 +79,6 @@ class Request:
         new_balance = (await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id) +
                        int(player_data['price']) // 3)
         query = f"UPDATE users SET {str(player_user_team_pos)} = 0 WHERE user_id = $1"
-
         await self.connector.execute(query, user_id)
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE, new_balance, user_id)
         await self.update_user_avgskill(user_id)

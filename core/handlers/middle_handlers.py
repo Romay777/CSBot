@@ -46,7 +46,7 @@ async def buy_player_waiting_nickname(callback: types.CallbackQuery, state: FSMC
     await state.update_data(position=callback.data.replace("buy_on_", ""))
 
 
-@router.message(StepsForm.GET_NICKNAME)  # Если состояние = ожидание никнейма
+@router.message(StepsForm.GET_NICKNAME)  # Если состояние == ожидание никнейма
 async def buy_player_nickname_got(message: Message, request: Request, state: FSMContext):
     position = (await state.get_data()).get('position')
     await state.clear()

@@ -22,7 +22,7 @@ async def main():
     pool_connect = await create_pool()
     dp = Dispatcher(storage=MemoryStorage())
     dp.update.middleware.register(DbSession(pool_connect))
-    dp.include_routers(main_kb_instant_answers.router, middle_handlers.router, admin_handlers.router, commands.router)
+    dp.include_routers(admin_handlers.router, main_kb_instant_answers.router, middle_handlers.router, commands.router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     try:
