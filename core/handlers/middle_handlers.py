@@ -10,6 +10,33 @@ import text
 router = Router()
 
 
+@router.callback_query(F.data == "farm_by_fake_match")
+async def choosing_bet_coefficient(callback: types.CallbackQuery):
+    await callback.message.edit_text(text.farm_choose_bet_coefficient, reply_markup=await inline.get_bet_coefficient())
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith("coefficient"))
+async def start_farm_by_fake_match(callback: types.CallbackQuery, state: FSMContext, request: Request):
+    if not "True" == (await state.get_data()).get('playing'):
+        await state.set_state(StepsForm.IS_PLAYING)
+        await state.update_data(playing="True")
+        await callback.message.edit_text(await request.farming(callback.from_user.id,
+                                                               callback,
+                                                               "by_fake_match",
+                                                               F.data[-1]))
+        await state.clear()
+    else:
+        await callback.message.edit_text(text.farm_already_playing)
+    await callback.answer()
+
+
+@router.callback_query(F.data == "farm_by_game")
+async def gun_choosing(callback: types.CallbackQuery):
+    await callback.message.edit_text(text.farm_choose_gun, reply_markup=await inline.get_guns_choice())
+    await callback.answer()
+
+
 @router.callback_query(F.data == "gun_choosed")
 async def choosing_side_edit(callback: types.CallbackQuery):
     await callback.message.edit_text(text.farm_choose_side, reply_markup=await inline.get_side_choice())
@@ -17,11 +44,11 @@ async def choosing_side_edit(callback: types.CallbackQuery):
 
 
 @router.callback_query(F.data == "side_choosed")
-async def start_farm(callback: types.CallbackQuery, state: FSMContext, request: Request):
+async def start_farm_by_game(callback: types.CallbackQuery, state: FSMContext, request: Request):
     if not "True" == (await state.get_data()).get('playing'):
         await state.set_state(StepsForm.IS_PLAYING)
         await state.update_data(playing="True")
-        await callback.message.edit_text(await request.farming(callback.from_user.id, callback))
+        await callback.message.edit_text(await request.farming(callback.from_user.id, callback, "by_game"))
         await state.clear()
     else:
         await callback.message.edit_text(text.farm_already_playing)
@@ -69,7 +96,8 @@ async def close_message(callback: types.CallbackQuery):
 async def sell_player_list_creation(callback: types.CallbackQuery, request: Request):
     await callback.message.edit_text(
         "Выберите игрока, которого хотите продать\n(указана сумма, которая вернется на баланс)",
-        reply_markup=await inline.get_nicknames_keyboard(await request.get_user_team_nicknames_prices(callback.from_user.id)))
+        reply_markup=await inline.get_nicknames_keyboard(
+            await request.get_user_team_nicknames_prices(callback.from_user.id)))
     await callback.answer()
 
 

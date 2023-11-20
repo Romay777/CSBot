@@ -15,7 +15,7 @@ async def get_balance(msg: Message, request: Request):
 
 @router.message(F.text == "🤑 Фармить")
 async def start_farming(msg: Message):
-    await msg.answer(text.farm, reply_markup=await inline.get_farm_methods())
+    await msg.answer(text.farm_choose_method, reply_markup=await inline.get_farm_methods())
 
 
 @router.message(F.text == "💰 Купить/Продать игрока")

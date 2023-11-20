@@ -11,6 +11,15 @@ async def get_buy_sell_kb():
     return builder.as_markup(resize_keyboard=True)
 
 
+# Keyboard that shows user's players
+async def get_nicknames_keyboard(nicknames):
+    builder = InlineKeyboardBuilder()
+    for i in range(5):
+        builder.button(text=nicknames[i], callback_data="sell_" + nicknames[i])
+    builder.adjust(1)
+    return builder.as_markup(resize_keyboard=True)
+
+
 # List of available positions
 async def get_position_list(positions):
     builder = InlineKeyboardBuilder()
@@ -24,12 +33,20 @@ async def get_position_list(positions):
     return builder.as_markup(resize_keyboard=True)
 
 
-# List of farm methods
-async def get_farm_methods():
+# List of guns [doesn't matter]
+async def get_guns_choice():
     builder = InlineKeyboardBuilder()
     builder.button(text="MAC-10", callback_data="gun_choosed")
     builder.button(text="UMP-45", callback_data="gun_choosed")
     builder.button(text="MP-7", callback_data="gun_choosed")
+    return builder.as_markup(resize_keyboard=True)
+
+
+# List of farm methods
+async def get_farm_methods():
+    builder = InlineKeyboardBuilder()
+    builder.button(text="⚠️Подставной матч⚠️", callback_data="farm_by_fake_match")
+    builder.button(text="♻️Обычный матч♻️", callback_data="farm_by_game")
     return builder.as_markup(resize_keyboard=True)
 
 
@@ -41,10 +58,9 @@ async def get_side_choice():
     return builder.as_markup(resize_keyboard=True)
 
 
-# Keyboard that shows user's players
-async def get_nicknames_keyboard(nicknames):
+async def get_bet_coefficient():
     builder = InlineKeyboardBuilder()
-    for i in range(5):
-        builder.button(text=nicknames[i], callback_data="sell_" + nicknames[i])
-    builder.adjust(1)
+    builder.button(text="x1.2", callback_data="coefficient_1")
+    builder.button(text="x1.5", callback_data="coefficient_2")
+    builder.button(text="x2", callback_data="coefficient_3")
     return builder.as_markup(resize_keyboard=True)

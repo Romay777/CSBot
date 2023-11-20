@@ -60,8 +60,11 @@ class Request:
                                                  players_ids[2], players_ids[3], players_ids[4]) // 5
         await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, avgskill, user_id)
 
-    async def farming(self, user_id, callback: types.CallbackQuery):
-        result = await farming.default_farm(user_id, callback, self)
+    async def farming(self, user_id, callback: types.CallbackQuery, farm_type, coefficient=None):
+        if farm_type == "by_game":
+            result = await farming.by_game(user_id, callback, self)
+        else:
+            result = await farming.by_fake_match(user_id, callback, self, coefficient)
         await self.connector.execute(dbqueries.USER_BALANCE_UPDATE_ADD, result, user_id)
         return text.farm_result.format(result=result,
                                        user_balance=await self.get_balance(user_id))
