@@ -15,6 +15,9 @@ class Request:
     async def add_data(self, user_id, user_name):
         await self.connector.execute(dbqueries.ADD_DATA, user_id, user_name)
 
+    async def admin_ban_user(self, user_id):
+        return
+
     async def get_balance(self, user_id):
         return '{:,}'.format(int(await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id))).replace(
             ',', "'")
@@ -59,6 +62,9 @@ class Request:
         avgskill = await self.connector.fetchval(dbqueries.GET_USER_TEAM_ALL_SKILL, players_ids[0], players_ids[1],
                                                  players_ids[2], players_ids[3], players_ids[4]) // 5
         await self.connector.execute(dbqueries.USER_AVGSKILL_UPDATE, avgskill, user_id)
+
+    async def update_user_balance(self, new_balance, user_id):
+        await self.connector.execute(dbqueries.USER_BALANCE_UPDATE, new_balance, user_id)
 
     async def farming(self, user_id, callback: types.CallbackQuery, farm_type, coefficient=None):
         if farm_type == "by_game":
@@ -110,7 +116,7 @@ class Request:
 
         for i in range(1, total):
             player_data = await self.connector.fetchrow(dbqueries.GET_PLAYER_LIST_DATA, i)
-            players_info = (f"<code>{player_data['nickname']}</code> | "
+            players_info = (f"[{player_data['skill']}] <code>{player_data['nickname']}</code> | "
                             f"<b>{player_data['team']}</b> | "
                             f"""Цена: <b>${'{:,}'.format(int(player_data['price'])).replace(',', "'")}</b>\n""")
             players.append(players_info)

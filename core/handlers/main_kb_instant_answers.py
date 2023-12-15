@@ -20,7 +20,8 @@ async def start_farming(msg: Message):
 
 @router.message(F.text == "💰 Купить/Продать игрока")
 async def buy_sell_player(msg: Message):
-    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"), reply_markup=await inline.get_buy_sell_kb())
+    await msg.answer(text.choose_action.format(action="<b>[Покупка/Продажа]</b>"),
+                     reply_markup=await inline.get_buy_sell_kb())
 
 
 @router.message(F.text == "🎮 Моя команда")

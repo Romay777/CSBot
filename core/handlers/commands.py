@@ -25,6 +25,6 @@ async def get_author(msg: Message):
     await msg.reply(text.author)
 
 
-@router.message()  # Если не обработан ни один предыдущий хэндлер
+@router.message()  # Если не обработан ни один хэндлер
 async def answer_unknown_message(msg: Message):
     await msg.answer(text.unknown, reply_markup=kb.menu())
