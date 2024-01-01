@@ -1,11 +1,18 @@
 from aiogram import F, Router
 from aiogram.types import Message
+from aiogram.fsm.context import FSMContext
 
-from core.keyboards import inline
+from core.keyboards import inline, kb
 from core.utils.dbconnect import Request
 import text
 
 router = Router()
+
+
+@router.message(F.text == "↩️ Отмена")
+async def clear_status(msg: Message, state: FSMContext):
+    await state.clear()
+    await msg.answer("Действие отменено", reply_markup=kb.menu())
 
 
 @router.message(F.text == "💸 Баланс")

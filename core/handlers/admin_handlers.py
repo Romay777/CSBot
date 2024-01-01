@@ -21,7 +21,7 @@ async def reveal_admin_panel(msg: Message):
 
 @router.message(F.text == "set user balance")
 async def getting_user_id(msg: Message, state: FSMContext):
-    await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
+    await msg.answer("Enter user_id:", reply_markup=kb.back_button())
     await state.set_state(StepsForm.ADMIN_GET_USER_BALANCE_CHANGING)
 
 
@@ -38,24 +38,38 @@ async def get_user_id_balance(msg: Message, state: FSMContext, request: Request)
 
 @router.message(F.text == "get user balance")
 async def getting_user_id(msg: Message, state: FSMContext):
-    await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
+    await msg.answer("Enter user_id:", reply_markup=kb.back_button())
     await state.set_state(StepsForm.ADMIN_GET_USER_FOR_BALANCE)
 
 
 @router.message(StepsForm.ADMIN_GET_USER_FOR_BALANCE)
 async def get_user_balance_by_id(msg: Message, state: FSMContext, request: Request):
     await state.clear()
-    await msg.answer(f"User balance with id [{msg.text}] = <code>{await request.get_balance(int(msg.text))}</code>")
+    await msg.answer(f"User balance with id [{msg.text}] = <code>{await request.get_balance(int(msg.text))}</code>",
+                     reply_markup=kb.menu(is_admin=True))
 
 
 @router.message(F.text == "ban user")
 async def getting_id(msg: Message, state: FSMContext, request: Request):
-    await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
-    await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN)
+    await msg.answer("Enter user_id:", reply_markup=kb.back_button())
+    await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN_UNBAN)
+    await state.update_data(action="ban")
 
 
-@router.message(StepsForm.ADMIN_GET_USER_ID_FOR_BAN)
-async def ban_user_by_id(msg: Message, state: FSMContext, request: Request):
+@router.message(F.text == "unban user")
+async def getting_id(msg: Message, state: FSMContext, request: Request):
+    await msg.answer("Enter user_id:", reply_markup=kb.back_button())
+    await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN_UNBAN)
+    await state.update_data(action="unban")
+
+
+@router.message(StepsForm.ADMIN_GET_USER_ID_FOR_BAN_UNBAN)
+async def ban_unban_user_by_id(msg: Message, state: FSMContext, request: Request):
+    action = (await state.get_data()).get('target_user_id')
     await state.clear()
-    await request.admin_ban_user(int(msg.text))
-    await msg.answer(f"User_id [{msg.text}] banned")
+    if action == "ban":
+        await request.ban_user(int(msg.text))
+        await msg.answer(f"User_id [{msg.text}] has been banned", reply_markup=kb.menu(is_admin=True))
+    else:
+        await request.unban_user(int(msg.text))
+        await msg.answer(f"User_id [{msg.text}] has been unbanned", reply_markup=kb.menu(is_admin=True))
