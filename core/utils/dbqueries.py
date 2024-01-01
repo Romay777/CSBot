@@ -1,8 +1,8 @@
 ADD_DATA = ("INSERT INTO users (user_id, user_name) "
             "VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET user_name = $2")
 
-ADMIN_BAN_USER = ""
-
+ADMIN_BAN_USER = """INSERT INTO banned_users (user_id, user_name, purpose) SELECT user_id, user_name, $2 FROM users 
+                        WHERE user_id = $1 ON CONFLICT DO UPDATE SET purpose = excluded.purpose"""
 
 GET_USER_TEAM = "SELECT playerone, playertwo, playerthree, playerfour, playerfive FROM users WHERE user_id = $1"
 GET_USER_BALANCE = "SELECT balance FROM users WHERE user_id = $1"

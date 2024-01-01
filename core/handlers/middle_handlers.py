@@ -63,14 +63,14 @@ async def buy_player_list_creation(callback: types.CallbackQuery, request: Reque
     await callback.answer()
 
 
-@router.callback_query(F.data.startswith('buy_on_'))
+@router.callback_query(F.data.startswith('pos_'))
 async def buy_player_waiting_nickname(callback: types.CallbackQuery, state: FSMContext):
     await callback.message.edit_text("Напишите никнейм игрока, которого хотите купить:\n"
                                      "<b>[Его можно скопировать нажатием из списка игроков]</b>")
     await callback.answer()
     # Вот тут машина состояний, ожидание никнейма.
     await state.set_state(StepsForm.GET_NICKNAME)
-    await state.update_data(position=callback.data.replace("buy_on_", ""))
+    await state.update_data(position=callback.data.replace("pos_", ""))
 
 
 @router.message(StepsForm.GET_NICKNAME)  # Если состояние == ожидание никнейма

@@ -26,7 +26,7 @@ async def get_position_list(positions):
     has_free_pos = False
     for pos in pos_s:
         if positions[pos] == 0:
-            builder.button(text=f"{pos_s.index(pos)+1}", callback_data=f"buy_on_{pos}")
+            builder.button(text=f"{pos_s.index(pos)+1}", callback_data=f"pos_{pos}")
             has_free_pos = True
     if not has_free_pos:
         builder.button(text="Нет доступных позиций\n[закрыть]", callback_data="close_message")

@@ -15,7 +15,10 @@ class Request:
     async def add_data(self, user_id, user_name):
         await self.connector.execute(dbqueries.ADD_DATA, user_id, user_name)
 
-    async def admin_ban_user(self, user_id):
+    async def admin_ban_user(self, user_id, purpose="None"):
+        await self.connector.execute(dbqueries.ADMIN_BAN_USER, user_id, purpose)
+
+    async def check_user_ban(self, user_id):
         return
 
     async def get_balance(self, user_id):

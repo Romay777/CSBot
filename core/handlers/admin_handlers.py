@@ -20,7 +20,7 @@ async def reveal_admin_panel(msg: Message):
 
 
 @router.message(F.text == "set user balance")
-async def reveal_admin_panel(msg: Message, state: FSMContext):
+async def getting_user_id(msg: Message, state: FSMContext):
     await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
     await state.set_state(StepsForm.ADMIN_GET_USER_BALANCE_CHANGING)
 
@@ -37,18 +37,25 @@ async def get_user_id_balance(msg: Message, state: FSMContext, request: Request)
 
 
 @router.message(F.text == "get user balance")
-async def reveal_admin_panel(msg: Message, state: FSMContext):
+async def getting_user_id(msg: Message, state: FSMContext):
     await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
     await state.set_state(StepsForm.ADMIN_GET_USER_FOR_BALANCE)
 
 
 @router.message(StepsForm.ADMIN_GET_USER_FOR_BALANCE)
-async def get_user_id_balance(msg: Message, state: FSMContext, request: Request):
+async def get_user_balance_by_id(msg: Message, state: FSMContext, request: Request):
     await state.clear()
     await msg.answer(f"User balance with id [{msg.text}] = <code>{await request.get_balance(int(msg.text))}</code>")
 
 
 @router.message(F.text == "ban user")
-async def reveal_admin_panel(msg: Message, state: FSMContext):
+async def getting_id(msg: Message, state: FSMContext, request: Request):
     await msg.answer("Enter user_id:", reply_markup=kb.menu(is_admin=True))
     await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN)
+
+
+@router.message(StepsForm.ADMIN_GET_USER_ID_FOR_BAN)
+async def ban_user_by_id(msg: Message, state: FSMContext, request: Request):
+    await state.clear()
+    await request.admin_ban_user(int(msg.text))
+    await msg.answer(f"User_id [{msg.text}] banned")
