@@ -50,14 +50,14 @@ async def get_user_balance_by_id(msg: Message, state: FSMContext, request: Reque
 
 
 @router.message(F.text == "ban user")
-async def getting_id(msg: Message, state: FSMContext, request: Request):
+async def getting_id(msg: Message, state: FSMContext):
     await msg.answer("Enter user_id:", reply_markup=kb.back_button())
     await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN_UNBAN)
     await state.update_data(action="ban")
 
 
 @router.message(F.text == "unban user")
-async def getting_id(msg: Message, state: FSMContext, request: Request):
+async def getting_id(msg: Message, state: FSMContext):
     await msg.answer("Enter user_id:", reply_markup=kb.back_button())
     await state.set_state(StepsForm.ADMIN_GET_USER_ID_FOR_BAN_UNBAN)
     await state.update_data(action="unban")
@@ -73,3 +73,16 @@ async def ban_unban_user_by_id(msg: Message, state: FSMContext, request: Request
     else:
         await request.unban_user(int(msg.text))
         await msg.answer(f"User_id [{msg.text}] has been unbanned", reply_markup=kb.menu(is_admin=True))
+
+
+@router.message(F.text == "get tgid")
+async def getting_tgid(msg: Message, state: FSMContext):
+    await msg.answer("Enter user_name:", reply_markup=kb.back_button())
+    await state.set_state(StepsForm.ADMIN_GET_USER_TGID)
+
+
+@router.message(StepsForm.ADMIN_GET_USER_TGID)
+async def get_tgid_by_user_name(msg: Message, state: FSMContext, request: Request):
+    await state.clear()
+    user_id = await request.get_tgid(msg.text)
+    await msg.answer(str(user_id), reply_markup=kb.menu(is_admin=True))

@@ -24,6 +24,9 @@ class Request:
     async def check_user_ban(self, user_id):
         return
 
+    async def get_tgid(self, nickname):
+        return await self.connector.fetchval(dbqueries.ADMIN_GET_USER_ID, nickname)
+
     async def get_balance(self, user_id):
         return '{:,}'.format(int(await self.connector.fetchval(dbqueries.GET_USER_BALANCE, user_id))).replace(
             ',', "'")
