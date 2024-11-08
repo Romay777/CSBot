@@ -1,2 +1,2 @@
-TOKEN = "5692361312:AAHcPAVWhlYFpgKl-NBesnQF7WfCyMmsRcc"  # BotAPI Token
-ADMIN_ID = 880825017  # Admin Telegram ID
+TOKEN = "YYY:XXX"  # BotAPI Token
+ADMIN_ID = 123123123  # Admin Telegram ID
